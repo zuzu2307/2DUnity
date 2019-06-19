@@ -18,6 +18,7 @@ public class GroundScroller : MonoBehaviour
     void Update()
     {
         offSet = new Vector2(Time.time * gruondSpeed, 0);
+        renderer.material.mainTextureOffset = offSet;
 
     }
 }
