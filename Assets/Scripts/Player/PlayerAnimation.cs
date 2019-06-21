@@ -7,6 +7,13 @@ public class PlayerAnimation : MonoBehaviour
     private Animator playerAnimator;
     private Rigidbody2D playerRigidbody;
     private bool gameStarted;
+    public LayerMask groundLayer;
+    public float jump = 300f;
+    public Transform groundCheckPos;
+    public float radius = 1.19f;
+    public bool isGrounded;
+    private int jumpCheck = 0;
+
     void Awake()
     {
         playerAnimator = GetComponent<Animator>();
@@ -19,19 +26,57 @@ public class PlayerAnimation : MonoBehaviour
 
     }
 
+    void PlayerGrounded()
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheckPos.position, radius, groundLayer);
+        Debug.Log(isGrounded);
+
+
+    }
+
     void FixedUpdate()
     {
         if (gameStarted)
         {
+            PlayerWalk();
+            PlayerGrounded();
+            PlayerJump();
+        }
+    }
+
+    void PlayerWalk()
+    {
+        if (isGrounded)
             playerAnimator.SetFloat("Walk", 1f);
+        else
+            playerAnimator.SetFloat("Walk", 0f);
+    }
+
+    void PlayerJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (isGrounded)
+            {
+                playerAnimator.SetBool("Jump", true);
+                playerRigidbody.AddForce(new Vector3(0, jump, 0));
+                jumpCheck = 1;
+            }
+        }
+        else
+        {
+            if (jumpCheck == 1 && isGrounded)
+            {
+                playerAnimator.SetBool("Jump", false);
+                jumpCheck = 0;
+            }
 
         }
-
     }
 
     IEnumerator StartGame()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(3f);
         gameStarted = true;
 
     }
