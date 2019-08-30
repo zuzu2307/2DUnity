@@ -5,7 +5,12 @@ using UnityEngine;
 public class BGScroller : MonoBehaviour
 {
     MeshRenderer meshRenderer;
+
     public float bgSpeed = 0.01f;
+
+    [HideInInspector]
+    public bool canScroll;
+
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -15,6 +20,7 @@ public class BGScroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        meshRenderer.material.mainTextureOffset += new Vector2(bgSpeed * Time.deltaTime, 0);
+        if(canScroll)
+            meshRenderer.material.mainTextureOffset += new Vector2(bgSpeed * Time.deltaTime, 0);
     }
 }
