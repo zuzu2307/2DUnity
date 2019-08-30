@@ -20,7 +20,7 @@ public class BGScroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(canScroll)
+        if (canScroll)
             meshRenderer.material.mainTextureOffset += new Vector2(bgSpeed * Time.deltaTime, 0);
     }
 }

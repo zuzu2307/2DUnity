@@ -7,8 +7,10 @@ public class PlayerAnimation : MonoBehaviour
     private Animator playerAnimator;
     private Rigidbody2D playerRigidbody;
     private bool gameStarted;
+    private BGScroller bGScroller;
+    private GroundScroller groundScroller;
     public LayerMask groundLayer;
-    public float jump = 300f;
+    public float jump = 350f;
     public Transform groundCheckPos;
     public float radius = 1.19f;
     public bool isGrounded;
@@ -18,6 +20,8 @@ public class PlayerAnimation : MonoBehaviour
     {
         playerAnimator = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody2D>();
+        bGScroller = GameObject.Find("Background").GetComponent<BGScroller>();
+        groundScroller = GameObject.Find("Ground").GetComponent<GroundScroller>();
 
     }
     void Start()
@@ -78,6 +82,8 @@ public class PlayerAnimation : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         gameStarted = true;
+        bGScroller.canScroll = true;
+        groundScroller.canScroll = true;
 
     }
 

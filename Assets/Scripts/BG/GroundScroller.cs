@@ -8,6 +8,9 @@ public class GroundScroller : MonoBehaviour
     public float gruondSpeed = 0.01f;
     private Vector2 offSet;
 
+    [HideInInspector]
+    public bool canScroll;
+
     void Start()
     {
         renderer = GetComponent<Renderer>();
@@ -17,8 +20,10 @@ public class GroundScroller : MonoBehaviour
 
     void Update()
     {
-        offSet = new Vector2(Time.time * gruondSpeed, 0);
-        renderer.material.mainTextureOffset = offSet;
-
+        if (canScroll)
+        {
+            offSet = new Vector2(Time.time * gruondSpeed, 0);
+            renderer.material.mainTextureOffset = offSet;
+        }
     }
 }
