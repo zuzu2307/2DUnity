@@ -9,8 +9,9 @@ public class PlayerAnimation : MonoBehaviour
     private bool gameStarted;
     private BGScroller bGScroller;
     private GroundScroller groundScroller;
+    private BoxSpawn boxSpawner;
     public LayerMask groundLayer;
-    public float jump = 350f;
+    public float jump = 400f;
     public Transform groundCheckPos;
     public float radius = 1.19f;
     public bool isGrounded;
@@ -22,6 +23,7 @@ public class PlayerAnimation : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody2D>();
         bGScroller = GameObject.Find("Background").GetComponent<BGScroller>();
         groundScroller = GameObject.Find("Ground").GetComponent<GroundScroller>();
+        boxSpawner = GameObject.Find("BoxSpawner").GetComponent<BoxSpawn>();
 
     }
     void Start()
@@ -51,7 +53,7 @@ public class PlayerAnimation : MonoBehaviour
     void PlayerWalk()
     {
         if (isGrounded)
-            playerAnimator.SetFloat("Walk", 1f);
+            playerAnimator.SetFloat("Walk", 2f);
         else
             playerAnimator.SetFloat("Walk", 0f);
     }
@@ -84,7 +86,7 @@ public class PlayerAnimation : MonoBehaviour
         gameStarted = true;
         bGScroller.canScroll = true;
         groundScroller.canScroll = true;
-
+        boxSpawner.canSpawn = true;
     }
 
 }

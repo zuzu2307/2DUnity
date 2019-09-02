@@ -54,6 +54,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BG\BGScroller.cs" />
+     <Compile Include="Assets\Scripts\BG\BoxMove.cs" />
+     <Compile Include="Assets\Scripts\BG\BoxSpawn.cs" />
+     <Compile Include="Assets\Scripts\BG\Destroyer.cs" />
      <Compile Include="Assets\Scripts\BG\GroundScroller.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerAnimation.cs" />
  <Reference Include="Unity.Timeline.Editor">
